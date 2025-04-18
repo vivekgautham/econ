@@ -1,0 +1,7 @@
+attrs==23.2.0
+hypothesis==6.103.0
+polars==0.20.31
+sortedcontainers==2.4.0
+sympy==1.13.3
+spacy==3.7.5
+pandas==2.2
