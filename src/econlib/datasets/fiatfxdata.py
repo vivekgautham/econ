@@ -8,4 +8,4 @@ class EndpointFactory:
     @classmethod
     def get_historical_rates_endpoint(cls, date, base, quote_symbols):
         """Get Historical End points"""
-        return f"{cls.BASE_URL}/{date.strftime("%Y-%m-%d")}?access_key={cls.API_KEY}&base=GBP&symbols={quote_symbols.join(",")}"
+        return f"{cls.BASE_URL}/{date.strftime("%Y-%m-%d")}?access_key={cls.API_KEY}&base=GBP&symbols={",".join(quote_symbols)}"
