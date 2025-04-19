@@ -6,7 +6,7 @@ from econlib.statsutils.views import View
 
 
 def run_rates_view(args):
-
+    """Run Rates View per arguments"""
     view_map = {
         View.PRIMARY.value: get_primary_stats
     }
