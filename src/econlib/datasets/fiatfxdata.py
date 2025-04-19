@@ -1,6 +1,7 @@
 import datetime
 
 import httpx
+import pandas as pd
 from dateutil.rrule import DAILY, rrule
 
 
@@ -15,7 +16,7 @@ class EndpointFactory:
         return f"{cls.BASE_URL}{date.strftime("%Y-%m-%d")}?access_key={cls.API_KEY}"
 
 
-def get_historical_fiatfx_data():
+def get_historical_fiatfx_data(to_ccys: list[str]) -> tuple[str, pd.DataFrame]:
     dates = rrule(DAILY, dtstart=datetime.date.today(), until=datetime.date.today())
     base_ccy = None
     historical_data = []
@@ -40,3 +41,4 @@ def get_historical_fiatfx_data():
     historical_df = historical_df[
         (historical_df.quote_ccy.isin(to_ccys.split(",")))
     ].copy(deep=True)
+    return base_ccy, historical_df
