@@ -9,12 +9,14 @@ import pandas as pd
 log = logging.getLogger(__name__) 
 
 def get_primary_stats(base_ccy, to_ccy):
-    log.info("Running Primary Stats for Fiat %s", to_ccy)
+    log.info("Running Primary Stats for Fiat %s and %s", base_ccy, to_ccy)
     dates = rrule(DAILY, dtstart=date.today(), until=date.today())
     historical_data = []
     for cur_day in dates:
-        response = httpx.get(fiatfxdata.EndpointFactory.get_historical_rates_endpoint(cur_day, base_ccy, [to_ccy]), timeout=None)
+        response = httpx.get(fiatfxdata.EndpointFactory.get_historical_rates_endpoint(cur_day), timeout=None)
         data = response.json()
+        import pdb 
+        pdb.set_trace()
         for ccy, rate in data["rates"]:
             historical_data.append({"date": date, "ccy": ccy, "rate": rate})
 
