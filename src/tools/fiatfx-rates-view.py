@@ -1,7 +1,7 @@
 #!/usr/local/bin/economics/bin/python
 import argparse
 
-from econlib.statsutils.primary import get_primary_fiat_fx_stats
+from econlib.statsutils.fx.primary import get_primary_fiat_fx_stats
 from econlib.statsutils.views import View
 
 

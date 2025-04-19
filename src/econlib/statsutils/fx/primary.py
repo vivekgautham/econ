@@ -1,7 +1,5 @@
 import logging
-from datetime import date, datetime
 
-import httpx
 import pandas as pd
 import tabulate
 
@@ -18,7 +16,6 @@ def get_primary_fiat_fx_stats(from_ccy, to_ccys):
         .reset_index()
         .to_dict(orient="records")
     )
-
     log.info(
         "Rates Against %s \n %s",
         base_ccy,
