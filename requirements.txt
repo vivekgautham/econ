@@ -9,3 +9,5 @@ boltons==25.0.0
 httpx==0.28.1
 tabulate==0.9.0
 python-dateutil==2.9.0.post0
+black==25.1.0
+pre-commit==4.2.0
