@@ -3,7 +3,7 @@ import logging
 import pandas as pd
 import tabulate
 
-from econlib.datasets import fiatfxdata
+from econlib.datasets.fx import fiatfxdata
 
 log = logging.getLogger(__name__)
 
