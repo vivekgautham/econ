@@ -12,3 +12,4 @@ python-dateutil==2.9.0.post0
 black==25.1.0
 pre-commit==4.2.0
 pyflakes==3.3.2
+mypy==1.15.0

@@ -1,5 +1,11 @@
+from abc import ABC, abstractmethod
 from decimal import Decimal
 from enum import Enum
+from typing import Generator, Generic, TypeVar
+
+import attrs
+
+T = TypeVar("T")
 
 
 class IntervalUnit(Enum):
@@ -9,12 +15,19 @@ class IntervalUnit(Enum):
     YEARS = "years"
 
 
+@attrs.define
 class AmountAtRate:
     amount: Decimal
     rate: Decimal
-    interval: Decimal
+    withdrawal_schedule: list[Decimal]
+    total_interval_units: int
     interval_unit: IntervalUnit
 
 
-def get_cag():
-    pass
+@attrs.define
+class CompoundingCashFlowUnit:
+    sequence_id: int
+    interval_period: str
+    amount: Decimal
+    principal_in: Decimal
+    interest_earned: Decimal
