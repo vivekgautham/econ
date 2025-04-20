@@ -1,10 +1,7 @@
 from decimal import Decimal
 from enum import Enum
-from typing import TypeVar
 
 import attrs
-
-T = TypeVar("T")
 
 
 class IntervalUnit(Enum):
@@ -15,16 +12,15 @@ class IntervalUnit(Enum):
 
 
 @attrs.define
-class AmountAtRate:
+class InputParams:
     amount: Decimal
-    rate: Decimal
-    withdrawal_schedule: list[Decimal]
-    total_interval_units: int
+    rate_schedule: dict[int, Decimal]
+    withdrawal_schedule: dict[int, Decimal]
     interval_unit: IntervalUnit
 
 
 @attrs.define
-class CompoundingCashFlowUnit:
+class CashFlowOutput:
     sequence_id: int
     interval_period: str
     amount: Decimal
