@@ -1,7 +1,6 @@
-from abc import ABC, abstractmethod
 from decimal import Decimal
 from enum import Enum
-from typing import Generator, TypeVar
+from typing import TypeVar
 
 import attrs
 
