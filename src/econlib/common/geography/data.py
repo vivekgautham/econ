@@ -16,9 +16,9 @@ def _get_geo_static_data(file_name: str) -> pd.DataFrame:
 
 @functools.cache
 def get_countries():
-    return _get_geo_static_data("countries.csv")
+    return _get_geo_static_data("countries.csv").to_dict(orient="records")
 
 
 @functools.cache
 def get_regions():
-    return _get_geo_static_data("regions.csv")
+    return _get_geo_static_data("regions.csv").to_dict(orient="records")

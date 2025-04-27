@@ -33,6 +33,11 @@ class World:
     _CONTINENTS_BY_CODE: ClassVar[dict[str, Continent]] = {}
     _COUNTRIES_BY_CODE: ClassVar[dict[str, Continent]] = {}
 
+    def __new__(cls):
+        if not hasattr(cls, "instance"):
+            cls.instance = super(World, cls).__new__(cls)
+        return cls.instance
+
     @classmethod
     def get_continent_from_code(cls, code):
         pass
