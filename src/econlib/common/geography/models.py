@@ -115,8 +115,7 @@ class World:
 
     def short_summary(self):
         log.info(
-            "\nCountry Summary - %s \n\n%s\n",
-            self.name,
+            "\nWorld Summary \n\n%s\n",
             tabulate.tabulate(
                 [
                     [cont.name, cont.get_country_count()]
