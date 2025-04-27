@@ -16,9 +16,3 @@ def test_memusage():
     assert memusage.DIFF in record_dict["run_square_root"]
     assert memusage.PEAK in record_dict["run_square_root"]
     assert memusage.DIFF in record_dict["run_square_root"]
-
-    import pdb
-
-    pdb.set_trace()
-
-    _ = 2
