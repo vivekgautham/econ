@@ -50,7 +50,7 @@ class Continent:
 
     def short_summary(self):
         log.info(
-            "Continent Summary %s \n %s",
+            "\n\nContinent Summary - %s \n\n%s\n",
             self.name,
             tabulate.tabulate(
                 [["Name", self.name], ["Code", self.code]],
@@ -82,7 +82,7 @@ class World:
 
     @classmethod
     def get_continent_from_code(cls, code):
-        pass
+        return cls._CONTINENTS_BY_CODE[code]
 
     @classmethod
     def get_country_from_code(cls, code):

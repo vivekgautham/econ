@@ -7,7 +7,7 @@ from econlib.common.geography.models import World
 def world_view(args):
     """Run Rates View per arguments"""
     world = World()
-    continent = world.get_continent_from_code(args.continentcode)
+    continent = world.get_continent_from_code(args.c)
     continent.short_summary()
 
 
