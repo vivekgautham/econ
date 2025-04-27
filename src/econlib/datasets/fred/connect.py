@@ -23,6 +23,7 @@ SERIES_NAMES = [
     "DEXCAUS",
     "DEXKOUS",
     "DEXUSEU",
+    "DEXSIUS",
 ]
 
 
