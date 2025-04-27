@@ -14,8 +14,15 @@ def test_fileio_sync_writer():
         sync_temp_dir_writer(100, 10000)
 
     call_sync_temp_dir_writer()
-
     call_async_temp_dir_writer()
+
+    assert timeit.TIME_TAKEN in record_dict["call_sync_temp_dir_writer"]
+    assert timeit.TIME_TAKEN in record_dict["call_async_temp_dir_writer"]
+
+    assert (
+        record_dict["call_sync_temp_dir_writer"][timeit.TIME_TAKEN]
+        >= record_dict["call_async_temp_dir_writer"][timeit.TIME_TAKEN]
+    )
 
     import pdb
 

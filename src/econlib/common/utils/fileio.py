@@ -23,7 +23,7 @@ def async_temp_dir_writer(num_of_files, num_of_lines):
         asyncio.run(
             async_writer(
                 [os.path.join(tmp_dir, f"file{i}") for i in range(num_of_files)],
-                [random.random() for i in range(num_of_lines)],
+                [str(random.random()) for i in range(num_of_lines)],
             )
         )
 
@@ -32,5 +32,5 @@ def sync_temp_dir_writer(num_of_files, num_of_lines):
     with tempfile.TemporaryDirectory(suffix="_sync", delete=True) as tmp_dir:
         sync_writer(
             [os.path.join(tmp_dir, f"file{i}") for i in range(num_of_files)],
-            [random.random() for i in range(num_of_lines)],
+            [str(random.random()) for i in range(num_of_lines)],
         )
