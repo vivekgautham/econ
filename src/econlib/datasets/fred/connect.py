@@ -28,11 +28,11 @@ def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
         action_item = grequests.get(url)
         tasks.append(action_item)
     responses = grequests.map(tasks)
-    data = []
+    date = []
     for series_name, response in zip(SERIES_NAMES, responses):
         json_data = response.json()
-        data = json_data["observations"]
-        for row in data:
+        observations = json_data["observations"]
+        for row in observations:
             data.append(
                 {
                     "Series": series_name,
@@ -40,6 +40,7 @@ def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
                     "Date": datetime.datetime.strptime(row["date"], "%Y-%m-%d").date(),
                 }
             )
+
     rates_df = pd.DataFrame(data)
     filtered_rates_df = (
         rates_df[(rates_df.Date >= start_date) & (rates_df.Date <= end_date)]
