@@ -94,7 +94,7 @@ class World:
 
     _CONTINENTS_BY_CODE: ClassVar[dict[str, Continent]] = {}
 
-    def __new__(cls):
+    def __new__(cls) -> World:
         if not hasattr(cls, "instance"):
             cls.instance = super(World, cls).__new__(cls)
             cls.setup()
@@ -110,7 +110,7 @@ class World:
             )
 
     @classmethod
-    def get_continent_from_code(cls, code):
+    def get_continent_from_code(cls, code) -> Continent:
         return cls._CONTINENTS_BY_CODE[code]
 
     def short_summary(self):
