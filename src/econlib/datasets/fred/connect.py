@@ -5,6 +5,8 @@ import grequests
 import pandas as pd
 import tabulate
 
+from econlib.common.perf.timeit import timeit
+
 log = logging.getLogger(__name__)
 
 API_KEY = "2d9fe8dbad89dabfd5afba8ca6e5f4f6"
@@ -17,12 +19,17 @@ SERIES_NAMES = [
     "DEXCHUS",
     "DEXJPUS",
     "DEXUSUK",
+    "DEXUSAL",
+    "DEXCAUS",
+    "DEXKOUS",
+    "DEXUSEU",
 ]
 
 
 URLS = [f"{FRED_URL}&series_id={series}&file_type=json" for series in SERIES_NAMES]
 
 
+@timeit
 def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
     tasks = []
     for url in URLS:
@@ -49,11 +56,13 @@ def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
         .reset_index()
     )
     log.info(
-        "Rates \n %s",
+        "\nRates\n%s",
         tabulate.tabulate(
             filtered_rates_df.values.tolist(),
             headers=filtered_rates_df.columns,
-            tablefmt="grid",
+            tablefmt="fancy_grid",
+            numalign="right",
+            stralign="left",
         ),
     )
     return data

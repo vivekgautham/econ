@@ -2,3 +2,5 @@ __pycache__/
 algodsvenv
 
 .vscode/
+.mypy_cache/
+.pytest_cache/
