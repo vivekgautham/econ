@@ -1,6 +1,6 @@
 #!/usr/local/bin/economics/bin/python
 
-from econlib.datasets.fred import fetch_spot_rates
+from econlib.datasets.fred.connect import fetch_spot_rates
 
 
 def show_spot_rates():
