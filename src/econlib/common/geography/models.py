@@ -37,7 +37,9 @@ class Continent:
     code: str
     name: str
 
-    _countries_by_code: dict[str, Country] = attrs.field(default={}, init=False)
+    _countries_by_code: dict[str, Country] = attrs.field(
+        default=attrs.Factory(dict), init=False
+    )
 
     def __attrs_post_init__(self):
         from econlib.common.geography.data import get_countries
