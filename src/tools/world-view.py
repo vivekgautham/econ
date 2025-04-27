@@ -7,15 +7,21 @@ from econlib.common.geography.models import World
 def world_view(args):
     """Run Rates View per arguments"""
     world = World()
-    continent = world.get_continent_from_code(args.c)
-    continent.short_summary()
+    continent = world.get_continent_from_code(args.coc)
+    if args.ctc:
+        country = continent.get_country_from_code(args.ctc)
+        country.short_summary()
+    else:
+        continent.short_summary()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="World view")
 
-    view = parser.add_argument_group("continent")
-    view.add_argument("--c", "--continentcode", help="continent code", required=True)
+    parser.add_argument(
+        "--coc", "--continentcode", help="continent code", required=True
+    )
+    parser.add_argument("--ctc", "--countrycode", help="country code", required=False)
 
     args = parser.parse_args()
 

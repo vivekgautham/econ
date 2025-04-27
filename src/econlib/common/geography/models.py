@@ -20,7 +20,9 @@ class Country:
     name: str
     continent_code: str
 
-    _regions_by_code: dict[str, Region] = attrs.field(default={}, init=False)
+    _regions_by_code: dict[str, Region] = attrs.field(
+        default=attrs.Factory(dict), init=False
+    )
 
     def __attrs_post_init__(self):
         from econlib.common.geography.data import get_regions
@@ -30,6 +32,21 @@ class Country:
                 self._regions_by_code[region["code"]] = Region(
                     region["code"], region["name"], region["iso_country"]
                 )
+
+    def short_summary(self):
+        log.info(
+            "\nCountry Summary - %s \n\n%s\n",
+            self.name,
+            tabulate.tabulate(
+                [
+                    ["Name", self.name],
+                    ["Code", self.alpha_2_code],
+                    ["Number of Regions", len(self._regions_by_code)],
+                ],
+                headers=["Field", "Value"],
+                tablefmt="grid",
+            ),
+        )
 
 
 @attrs.frozen
@@ -52,6 +69,9 @@ class Continent:
 
     def get_country_from_code(self, code):
         return self._countries_by_code[code]
+
+    def get_country_count(self):
+        return len(self._countries_by_code)
 
     def short_summary(self):
         log.info(
@@ -92,3 +112,17 @@ class World:
     @classmethod
     def get_continent_from_code(cls, code):
         return cls._CONTINENTS_BY_CODE[code]
+
+    def short_summary(self):
+        log.info(
+            "\nCountry Summary - %s \n\n%s\n",
+            self.name,
+            tabulate.tabulate(
+                [
+                    [cont.name, cont.get_country_count()]
+                    for cont in self._CONTINENTS_BY_CODE.values()
+                ],
+                headers=["Continents", "Number of countries"],
+                tablefmt="grid",
+            ),
+        )
