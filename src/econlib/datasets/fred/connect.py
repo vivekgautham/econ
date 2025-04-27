@@ -3,6 +3,7 @@ import logging
 
 import grequests
 import pandas as pd
+import tabulate
 
 log = logging.getLogger(__name__)
 
@@ -47,5 +48,12 @@ def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
         .pivot(index="Series", columns="Date", values="Rate")
         .reset_index()
     )
-    data = filtered_rates_df.to_dict(orient="records")
+    log.info(
+        "Rates \n %s",
+        tabulate.tabulate(
+            filtered_rates_df.values.tolist(),
+            headers=filtered_rates_df.columns,
+            tablefmt="grid",
+        ),
+    )
     return data
