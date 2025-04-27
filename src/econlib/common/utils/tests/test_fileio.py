@@ -1,5 +1,5 @@
 from econlib.common.perf import timeit
-from econlib.common.utils.fileio import sync_temp_dir_writer
+from econlib.common.utils import fileio
 
 
 def test_fileio_sync_writer():
@@ -7,11 +7,11 @@ def test_fileio_sync_writer():
 
     @timeit.timeitrecorder(record_dict)
     def call_sync_temp_dir_writer():
-        sync_temp_dir_writer(100, 10000)
+        fileio.sync_temp_dir_writer(1000, 100000)
 
     @timeit.timeitrecorder(record_dict)
     def call_async_temp_dir_writer():
-        sync_temp_dir_writer(100, 10000)
+        fileio.async_temp_dir_writer(1000, 100000)
 
     call_sync_temp_dir_writer()
     call_async_temp_dir_writer()
@@ -23,9 +23,3 @@ def test_fileio_sync_writer():
         record_dict["call_sync_temp_dir_writer"][timeit.TIME_TAKEN]
         >= record_dict["call_async_temp_dir_writer"][timeit.TIME_TAKEN]
     )
-
-    import pdb
-
-    pdb.set_trace()
-
-    _ = 2
