@@ -33,6 +33,12 @@ class Country:
                     region["code"], region["name"], region["iso_country"]
                 )
 
+    def get_regions_from_code(self, code) -> Region:
+        return self._regions_by_code[code]
+
+    def get_region_count(self) -> int:
+        return len(self._regions_by_code)
+
     def short_summary(self):
         log.info(
             "\nCountry Summary - %s \n\n%s\n",
@@ -67,10 +73,10 @@ class Continent:
                     country["code"], country["name"], self.code
                 )
 
-    def get_country_from_code(self, code):
+    def get_country_from_code(self, code) -> Country:
         return self._countries_by_code[code]
 
-    def get_country_count(self):
+    def get_country_count(self) -> int:
         return len(self._countries_by_code)
 
     def short_summary(self):
