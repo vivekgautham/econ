@@ -53,7 +53,11 @@ class Continent:
             "\n\nContinent Summary - %s \n\n%s\n",
             self.name,
             tabulate.tabulate(
-                [["Name", self.name], ["Code", self.code]],
+                [
+                    ["Name", self.name],
+                    ["Code", self.code],
+                    ["Number of Countries", len(self._countries_by_code)],
+                ],
                 headers=["Field", "Value"],
                 tablefmt="grid",
             ),
