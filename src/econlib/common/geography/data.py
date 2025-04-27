@@ -8,7 +8,7 @@ GEO_STATIC_DATA_BASE_URL = "https://davidmegginson.github.io/ourairports-data/"
 
 def _get_geo_static_data(file_name: str) -> pd.DataFrame:
     url = f"{GEO_STATIC_DATA_BASE_URL}{file_name}"
-    df = pd.read_csv(url)
+    df = pd.read_csv(url, keep_default_na=False)
     return df
 
 

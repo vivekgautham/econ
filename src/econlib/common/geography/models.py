@@ -50,6 +50,9 @@ class Continent:
                     country["code"], country["name"], self.code
                 )
 
+    def get_country_from_code(self, code):
+        return self._countries_by_code[code]
+
     def short_summary(self):
         log.info(
             "\n\nContinent Summary - %s \n\n%s\n",
@@ -89,7 +92,3 @@ class World:
     @classmethod
     def get_continent_from_code(cls, code):
         return cls._CONTINENTS_BY_CODE[code]
-
-    @classmethod
-    def get_country_from_code(cls, code):
-        pass
