@@ -29,7 +29,7 @@ def fetch_spot_rates(start_date: datetime.date, end_date: datetime.date):
         tasks.append(action_item)
     responses = grequests.map(tasks)
     data = []
-    for series_name, response in map(SERIES_NAMES, responses):
+    for series_name, response in zip(SERIES_NAMES, responses):
         json_data = response.json()
         data = json_data["observations"]
         for row in data:
