@@ -20,15 +20,16 @@ class Country:
     name: str
     continent_code: str
 
-    _REGIONS_BY_CODE: ClassVar[dict[str, Region]] = {}
+    _regions_by_code: dict[str, Region] = attrs.field(default={}, init=False)
 
     def __attrs_post_init__(self):
         from econlib.common.geography.data import get_regions
 
-        for continent in get_regions():
-            self._REGIONS_BY_CODE[continent["Code"]] = Region(
-                continent["Code"], continent["Name"]
-            )
+        for region in get_regions():
+            if region["iso_country"] == self.alpha_2_code:
+                self._regions_by_code[region["code"]] = Region(
+                    region["code"], region["name"], region["iso_country"]
+                )
 
 
 @attrs.frozen
@@ -36,15 +37,16 @@ class Continent:
     code: str
     name: str
 
-    _COUNTRIES_BY_CODE: ClassVar[dict[str, Country]] = {}
+    _countries_by_code: dict[str, Country] = attrs.field(default={}, init=False)
 
     def __attrs_post_init__(self):
         from econlib.common.geography.data import get_countries
 
         for country in get_countries():
-            self._COUNTRIES_BY_CODE[country["code"]] = Country(
-                country["code"], country["name"]
-            )
+            if country["continent"] == self.code:
+                self._countries_by_code[country["code"]] = Country(
+                    country["code"], country["name"], self.code
+                )
 
     def short_summary(self):
         log.info(
