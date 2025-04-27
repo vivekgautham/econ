@@ -47,12 +47,15 @@ class Continent:
             )
 
     def short_summary(self):
-        log.info("%s", self.name)
-        tabulate.tabulate(
-            [["Name", self.name], ["Code", self.code]],
-            headers=["Field", "Value"],
-            tablefmt="grid",
-        ),
+        log.info(
+            "Continent Summary %s \n %s",
+            self.name,
+            tabulate.tabulate(
+                [["Name", self.name], ["Code", self.code]],
+                headers=["Field", "Value"],
+                tablefmt="grid",
+            ),
+        )
 
 
 class World:
