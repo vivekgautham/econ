@@ -23,6 +23,11 @@ def get_regions() -> list[dict[Hashable, Any]]:
 
 
 @functools.cache
+def get_airports() -> list[dict[Hashable, Any]]:
+    return _get_geo_static_data("airports.csv").to_dict(orient="records")
+
+
+@functools.cache
 def get_continents() -> list[dict[Hashable, Any]]:
     return [
         {"Code": "AF", "Name": "Africa"},

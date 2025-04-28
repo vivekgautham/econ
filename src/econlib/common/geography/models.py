@@ -8,10 +8,47 @@ log = logging.getLogger(__name__)
 
 
 @attrs.frozen
+class Airport:
+    icao_code: str
+    iata_code: str
+    region_code: str
+
+
+@attrs.frozen
 class Region:
     region_code: str
     name: str
     country_code: str
+
+    _airports_by_code: dict[str, Airport] = attrs.field(
+        default=attrs.Factory(dict), init=False
+    )
+
+    def __attrs_post_init__(self):
+        from econlib.common.geography.data import get_airports
+
+        for airport in get_airports():
+            if airport["iso_region"] == self.region_code:
+                self._airports_by_code[airport["icao_code"]] = Airport(
+                    airport["icao_code"],
+                    airport["iata_code"],
+                    airport["iso_region"],
+                )
+
+    def short_summary(self):
+        log.info(
+            "\nRegion Summary - %s \n\n%s\n",
+            self.name,
+            tabulate.tabulate(
+                [
+                    ["Name", self.name],
+                    ["Code", self.region_code],
+                    ["Number of Airports", len(self._airports_by_code)],
+                ],
+                headers=["Field", "Value"],
+                tablefmt="grid",
+            ),
+        )
 
 
 @attrs.frozen
@@ -100,7 +137,7 @@ class World:
 
     _CONTINENTS_BY_CODE: ClassVar[dict[str, Continent]] = {}
 
-    def __new__(cls) -> World:
+    def __new__(cls):
         if not hasattr(cls, "instance"):
             cls.instance = super(World, cls).__new__(cls)
             cls.setup()
