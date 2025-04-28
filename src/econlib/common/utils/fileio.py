@@ -9,10 +9,10 @@ import aiofiles
 async def async_writer(file_paths, lines):
     for path in file_paths:
         async with aiofiles.open(path, mode="w") as f:
-            f.write("\n".join(lines))
+            await f.write("\n".join(lines))
 
 
-def sync_writer(file_paths, num_of_lines):
+def sync_writer(file_paths, lines):
     for path in file_paths:
         with open(path, mode="w") as f:
             f.write("\n".join(lines))
