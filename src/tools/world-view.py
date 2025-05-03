@@ -4,23 +4,34 @@ import argparse
 from econlib.common.geography.models import World
 
 
+def region_view(country, args):
+    if args.rgc:
+        region = country.get_regions_from_code(args.rgc)
+        region.short_summary()
+    else:
+        country.short_summary()
+
+
+def country_view(continent, args):
+    if args.ctc:
+        country = continent.get_country_from_code(args.ctc)
+        region_view(country, args)
+    else:
+        continent.short_summary()
+
+
+def continent_view(world, args):
+    if args.coc:
+        continent = world.get_continent_from_code(args.coc)
+        country_view(continent, args)
+    else:
+        world.short_summary()
+
+
 def world_view(args):
     """Run Rates View per arguments"""
     world = World()
-
-    if args.coc:
-        continent = world.get_continent_from_code(args.coc)
-        if args.ctc:
-            country = continent.get_country_from_code(args.ctc)
-            if args.rgc:
-                region = country.get_regions_from_code(args.rgc)
-                region.short_summary()
-            else:
-                country.short_summary()
-        else:
-            continent.short_summary()
-    else:
-        world.short_summary()
+    continent_view(world, args)
 
 
 if __name__ == "__main__":
