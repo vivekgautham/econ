@@ -35,6 +35,9 @@ class Region:
                     airport["iso_region"],
                 )
 
+    def get_airport_count(self) -> int:
+        return len(self._airports_by_code)
+
     def short_summary(self):
         log.info(
             "\nRegion Summary - %s \n\n%s\n",
@@ -76,6 +79,11 @@ class Country:
     def get_region_count(self) -> int:
         return len(self._regions_by_code)
 
+    def get_airports_count(self) -> int:
+        return sum(
+            region.get_airport_count() for region in self._regions_by_code.values()
+        )
+
     def short_summary(self):
         log.info(
             "\nCountry Summary - %s \n\n%s\n",
@@ -85,6 +93,7 @@ class Country:
                     ["Name", self.name],
                     ["Code", self.alpha_2_code],
                     ["Number of Regions", len(self._regions_by_code)],
+                    ["Number of Airports", self.get_airports_count()],
                 ],
                 headers=["Field", "Value"],
                 tablefmt="grid",
@@ -116,6 +125,11 @@ class Continent:
     def get_country_count(self) -> int:
         return len(self._countries_by_code)
 
+    def get_airports_count(self) -> int:
+        return sum(
+            country.get_airports_count() for country in self._countries_by_code.values()
+        )
+
     def short_summary(self):
         log.info(
             "\n\nContinent Summary - %s \n\n%s\n",
@@ -125,6 +139,7 @@ class Continent:
                     ["Name", self.name],
                     ["Code", self.code],
                     ["Number of Countries", len(self._countries_by_code)],
+                    ["Number of Airports", self.get_airports_count()],
                 ],
                 headers=["Field", "Value"],
                 tablefmt="grid",
