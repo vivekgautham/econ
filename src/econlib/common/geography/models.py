@@ -176,10 +176,10 @@ class World:
             "\nWorld Summary \n\n%s\n",
             tabulate.tabulate(
                 [
-                    [cont.name, cont.get_country_count()]
+                    [cont.name, cont.get_country_count(), cont.get_airports_count()]
                     for cont in self._CONTINENTS_BY_CODE.values()
                 ],
-                headers=["Continents", "Number of countries"],
+                headers=["Continents", "Number of Countries", "Number of Airports"],
                 tablefmt="grid",
             ),
         )
