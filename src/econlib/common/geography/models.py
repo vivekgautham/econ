@@ -171,14 +171,18 @@ class World:
     def get_continent_from_code(cls, code) -> Continent:
         return cls._CONTINENTS_BY_CODE[code]
 
+    def get_short_summary_data(self):
+        results = [
+            [cont.name, cont.get_country_count(), cont.get_airports_count()]
+            for cont in self._CONTINENTS_BY_CODE.values()
+        ]
+        return results
+
     def short_summary(self):
         log.info(
             "\nWorld Summary \n\n%s\n",
             tabulate.tabulate(
-                [
-                    [cont.name, cont.get_country_count(), cont.get_airports_count()]
-                    for cont in self._CONTINENTS_BY_CODE.values()
-                ],
+                self.get_short_summary_data(),
                 headers=["Continents", "Number of Countries", "Number of Airports"],
                 tablefmt="grid",
             ),
