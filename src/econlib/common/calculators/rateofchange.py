@@ -21,7 +21,7 @@ class ChangeCalculator:
         return self
 
     def __next__(self) -> Decimal:
-        if self.rem_time_units < 0:
+        if self.rem_time_units == 0:
             raise StopIteration("End of time")
 
         self.current_value += self.current_value * self.setting.rate_change

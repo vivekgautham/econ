@@ -3,7 +3,7 @@ from decimal import Decimal
 from econlib.common.calculators import rateofchange
 
 
-def test_change_calculator():
+def test_change_calculator_1():
     setting = rateofchange.Setting(Decimal(3.9), 7, Decimal(0.07))
     change_calc = rateofchange.ChangeCalculator(setting)
     assert list(change_calc) == (
@@ -15,6 +15,15 @@ def test_change_calculator():
             Decimal("5.469951749730000045695663602"),
             Decimal("5.852848372211100085331558311"),
             Decimal("6.262547758265877130292569528"),
-            Decimal("6.700926101344488571129997679"),
+        ]
+    )
+
+
+def test_change_calculator_2():
+    setting = rateofchange.Setting(Decimal(3.9), 1, Decimal(0.07 * 7))
+    change_calc = rateofchange.ChangeCalculator(setting)
+    assert list(change_calc) == (
+        [
+            Decimal("5.811000000000000049515946898"),
         ]
     )
