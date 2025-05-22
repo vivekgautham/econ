@@ -18,3 +18,4 @@ grequests==0.7.0
 aiofiles==24.1.0
 pyyaml==6.0.2
 fastapi==0.115.12
+rich==13.6.0
