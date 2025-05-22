@@ -1,5 +1,4 @@
 from decimal import Decimal
-from typing import Generator
 
 import attrs
 
@@ -19,9 +18,13 @@ class ChangeCalculator:
         self.rem_time_units = setting.time_units
 
     def __iter__(self):
+        import pdb
+
+        pdb.set_trace()
         return self
 
-    def __next__(self) -> Generator[Decimal, None, None]:
+    def __next__(self) -> Decimal:
         for _ in range(self.rem_time_units, 0, -1):
             self.current_value += self.current_value * self.setting.rate_change
-            yield self.current_value
+            return self.current_value
+        raise StopIteration("End of time")
