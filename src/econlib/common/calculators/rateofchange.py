@@ -18,13 +18,12 @@ class ChangeCalculator:
         self.rem_time_units = setting.time_units
 
     def __iter__(self):
-        import pdb
-
-        pdb.set_trace()
         return self
 
     def __next__(self) -> Decimal:
-        for _ in range(self.rem_time_units, 0, -1):
-            self.current_value += self.current_value * self.setting.rate_change
-            return self.current_value
-        raise StopIteration("End of time")
+        if self.rem_time_units < 0:
+            raise StopIteration("End of time")
+
+        self.current_value += self.current_value * self.setting.rate_change
+        self.rem_time_units -= 1
+        return self.current_value
