@@ -21,8 +21,7 @@ class ChangeCalculator:
     def __iter__(self):
         return self
 
-    def __next__(self) -> Generator[Decimal]:
-        if self.rem_time_units > 0:
+    def __next__(self) -> Generator[Decimal, None, None]:
+        for _ in range(self.rem_time_units, 0, -1):
             self.current_value += self.current_value * self.setting.rate_change
-            self.rem_time_units -= 1
             yield self.current_value
