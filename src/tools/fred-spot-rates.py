@@ -8,7 +8,7 @@ from econlib.datasets.fred.connect import fetch_spot_rates
 
 def show_spot_rates(start_date: datetime.date, end_date: datetime.date):
     """Show Spot Rates"""
-    fetch_spot_rates(datetime.date(2025, 4, 13), datetime.date(2025, 4, 18))
+    fetch_spot_rates(start_date, end_date)
 
 
 if __name__ == "__main__":
