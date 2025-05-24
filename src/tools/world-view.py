@@ -29,7 +29,7 @@ def continent_view(world, args):
 
 
 def world_view(args):
-    """Run Rates View per arguments"""
+    """Run World View per arguments"""
     world = World()
     continent_view(world, args)
 
