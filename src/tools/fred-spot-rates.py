@@ -6,7 +6,7 @@ from rich.prompt import Prompt
 from econlib.datasets.fred.connect import fetch_spot_rates
 
 
-def show_spot_rates(start_date: datetime.date, end_date: datetime.date):
+def show_spot_rates(start_date: datetime.date, end_date: datetime.date) -> None:
     """Show Spot Rates"""
     fetch_spot_rates(start_date, end_date)
 
