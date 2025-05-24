@@ -12,10 +12,9 @@ def show_spot_rates(start_date: datetime.date, end_date: datetime.date):
 
 
 if __name__ == "__main__":
-    start_date_response = Prompt.ask("Enter Start Date (YYYYMMDD): ")
-    end_date_response = Prompt.ask("Enter End Date (YYYYMMDD): ")
-    print(start_date_response, end_date_response)
+    start_date_response = Prompt.ask("Enter Start Date (YYYYMMDD)")
+    end_date_response = Prompt.ask("Enter End Date (YYYYMMDD)")
     show_spot_rates(
         datetime.datetime.strptime(start_date_response.strip(), "%Y%m%d").date(),
-        datetime.datetime.strptime(start_date_response.strip(), "%Y%m%d").date(),
+        datetime.datetime.strptime(end_date_response.strip(), "%Y%m%d").date(),
     )
