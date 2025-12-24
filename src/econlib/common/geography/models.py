@@ -9,6 +9,14 @@ log = logging.getLogger(__name__)
 
 @attrs.frozen
 class Airport:
+    """Represents an airport.
+
+    Attributes:
+        icao_code: The ICAO code of the airport.
+        iata_code: The IATA code of the airport.
+        region_code: The region code where the airport is located.
+    """
+
     icao_code: str
     iata_code: str
     region_code: str
@@ -16,6 +24,14 @@ class Airport:
 
 @attrs.frozen
 class Region:
+    """Represents a geographical region.
+
+    Attributes:
+        region_code: The code of the region.
+        name: The name of the region.
+        country_code: The country code where the region is located.
+    """
+
     region_code: str
     name: str
     country_code: str
@@ -56,6 +72,14 @@ class Region:
 
 @attrs.frozen
 class Country:
+    """Represents a country.
+
+    Attributes:
+        alpha_2_code: The alpha-2 code of the country.
+        name: The name of the country.
+        continent_code: The continent code where the country is located.
+    """
+
     alpha_2_code: str
     name: str
     continent_code: str
@@ -103,6 +127,13 @@ class Country:
 
 @attrs.frozen
 class Continent:
+    """Represents a continent.
+
+    Attributes:
+        code: The code of the continent.
+        name: The name of the continent.
+    """
+
     code: str
     name: str
 
@@ -148,7 +179,12 @@ class Continent:
 
 
 class World:
-    """World Geo Api"""
+    """A singleton class representing the world's geographical data.
+
+    This class provides access to continents, countries, regions, and airports.
+    It follows the singleton pattern to ensure only one instance of the world's
+    data is loaded.
+    """
 
     _CONTINENTS_BY_CODE: ClassVar[dict[str, Continent]] = {}
 
@@ -182,7 +218,7 @@ class World:
         log.info(
             "\nWorld Summary \n\n%s\n",
             tabulate.tabulate(
-                self.get_short_summary_data(),
+                self.get_short_summary__data(),
                 headers=["Continents", "Number of Countries", "Number of Airports"],
                 tablefmt="grid",
             ),

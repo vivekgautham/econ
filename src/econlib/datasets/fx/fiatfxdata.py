@@ -6,6 +6,7 @@ from dateutil.rrule import DAILY, rrule
 
 
 class EndpointFactory:
+    """A factory for creating exchangeratesapi.io API endpoints."""
 
     BASE_URL = "https://api.exchangeratesapi.io/v1/"
     API_KEY = "17c2b9fd0b3746fbbe13f0b0479a4bbf"
