@@ -218,7 +218,7 @@ class World:
         log.info(
             "\nWorld Summary \n\n%s\n",
             tabulate.tabulate(
-                self.get_short_summary__data(),
+                self.get_short_summary_data(),
                 headers=["Continents", "Number of Countries", "Number of Airports"],
                 tablefmt="grid",
             ),
