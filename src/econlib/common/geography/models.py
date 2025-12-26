@@ -24,7 +24,7 @@ class Airport:
 
 @attrs.frozen
 class Region:
-    """Represents a geographical region.
+    """Represents a geographical region within a country.
 
     Attributes:
         region_code: The code of the region.
