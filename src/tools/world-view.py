@@ -21,22 +21,15 @@ def view(entity, args):
             country = continent.get_country_from_code(args.country)
             if args.region:
                 region = country.get_regions_from_code(args.region)
-                if args.verbose:
-                    region.summary()
-                else:
-                    region.short_summary()
-            elif args.verbose:
+                region.summary()
+            elif args.country:
                 country.summary()
             else:
-                country.short_summary()
-        elif args.verbose:
+                continent.summary()
+        elif args.continent:
             continent.summary()
         else:
-            continent.short_summary()
-    elif args.verbose:
-        entity.summary()
-    else:
-        entity.short_summary()
+            entity.summary()
 
 
 def main():
@@ -53,12 +46,6 @@ def main():
     )
     parser.add_argument(
         "--region", help="The code of the region to view.", required=False
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        help="View the full details of an entity.",
-        action="store_true",
     )
 
     args = parser.parse_args()
