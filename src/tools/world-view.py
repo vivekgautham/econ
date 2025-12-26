@@ -8,28 +8,26 @@ import argparse
 from econlib.common.geography.models import World
 
 
-def view(entity, args):
-    """View an entity.
+def view(world: World, args: argparse.Namespace) -> None:
+    """View the world
 
     Args:
         entity: The entity to view.
         args: The command-line arguments.
     """
     if args.continent:
-        continent = entity.get_continent_from_code(args.continent)
+        continent = world.get_continent_from_code(args.continent)
         if args.country:
             country = continent.get_country_from_code(args.country)
             if args.region:
                 region = country.get_regions_from_code(args.region)
-                region.summary()
-            elif args.country:
-                country.summary()
+                region.short_summary()
             else:
-                continent.summary()
-        elif args.continent:
-            continent.summary()
+                country.short_summary()
         else:
-            entity.summary()
+            continent.short_summary()
+    else:
+        world.short_summary()
 
 
 def main():
