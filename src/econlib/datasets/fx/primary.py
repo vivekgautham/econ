@@ -1,3 +1,7 @@
+"""
+Provides functions for retrieving and processing primary fiat foreign exchange (FX) rate statistics.
+"""
+
 import logging
 import time
 
@@ -10,6 +14,18 @@ log = logging.getLogger(__name__)
 
 
 def get_primary_fiat_fx_stats(from_ccy: str, to_ccy: str) -> pd.DataFrame:
+    """
+    Retrieves and processes primary fiat foreign exchange (FX) rate statistics
+    between a base currency and a quote currency.
+
+    Args:
+        from_ccy (str): The base currency code (e.g., "USD").
+        to_ccy (str): The quote currency code (e.g., "EUR").
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the pivoted FX rates, with the base currency
+                      as the index and dates as columns.
+    """
     log.info("Running Primary Stats for Fiat FXs %s", to_ccy)
     historical_df_to_ccy = fiatfxdata.get_historical_fiatfx_data(to_ccy)
     log.info("Sleeping for 10 secs")
@@ -21,6 +37,7 @@ def get_primary_fiat_fx_stats(from_ccy: str, to_ccy: str) -> pd.DataFrame:
     pivot_view = pd.DataFrame(
         final_df.pivot(index="quote_ccy", columns="date", values="rate")
         .reset_index()
+        .rename(columns={"quote_ccy": from_ccy})
         .to_dict(orient="records")
     )
     log.info(
