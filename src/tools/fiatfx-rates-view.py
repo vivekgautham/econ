@@ -1,8 +1,8 @@
 #!/usr/local/bin/economics/bin/python
 import argparse
 
-from econlib.statsutils.fx.primary import get_primary_fiat_fx_stats
-from econlib.statsutils.views import View
+from econlib.datasets.fx.primary import get_primary_fiat_fx_stats
+from econlib.datasets.fx.views import View
 
 
 def run_rates_view(args):
