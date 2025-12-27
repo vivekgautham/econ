@@ -17,7 +17,7 @@ class EndpointFactory:
         return f"{cls.BASE_URL}{date.strftime("%Y-%m-%d")}?access_key={cls.API_KEY}"
 
 
-def get_historical_fiatfx_data(to_ccys: list[str]) -> pd.DataFrame:
+def get_historical_fiatfx_data(to_ccys: str) -> pd.DataFrame:
     dates = rrule(DAILY, dtstart=datetime.date.today(), until=datetime.date.today())
     base_ccy = None
     historical_data = []
